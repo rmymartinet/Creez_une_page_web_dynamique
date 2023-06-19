@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 50px;
+}
+.btn-0,
+.btn-1,
+.btn-2,
+.btn-3 {
+  border-radius: 60px;
+  border: solid 1px #1d6154;
+  color: #1d6154;
+}
+.btn-0:hover,
+.btn-1:hover,
+.btn-2:hover,
+.btn-3:hover {
+  background-color: #1d6154;
+  color: white;
+}
+
+.filter-text {
+  padding: 9px;
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+#contact {
+  width: 50%;
+  margin: auto;
+}
+#contact > * {
+  text-align: center;
+}
+#contact h2 {
+  margin-bottom: 20px;
+}
+#contact form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#contact input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label {
+  margin: 2em 0 1em 0;
+}
+#contact textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.edit,
+i {
+  /* display: none; */
+  font-size: 15px;
+}
+.hidden {
+  display: none;
+}
+
+.edit-button {
+  position: absolute;
+  top: 543px;
+  right: 650px;
+  background: none;
+  font-family: "Work Sans", sans-serif;
+}
+.banner-edition {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 50px;
+}
+
+.banner-edition .btn-1 button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.banner-edition .btn2 {
+  margin-left: 15px;
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 60px;
+}
+
+.banner-edition .edit {
+  color: white;
+}
+
+#introduction i {
+  margin-top: 10px;
+  margin-left: 55px;
+}
+
+.portfolio-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+.portfolio-header i {
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.modal1 {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 20% auto;
+  padding: 0 100px;
+  border: 1px solid #888;
+  width: 630px;
+  height: 730px;
+}
+
+.modal-content h2 {
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #000;
+  font-family: "Work Sans", sans-serif;
+  font-size: 26px;
+}
+
+.image-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  position: relative;
+}
+.img-element {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 25px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal1 .fa-trash-can {
+  background-color: black;
+  padding: 4px;
+  position: absolute;
+  z-index: 10;
+  color: white;
+  margin-top: 5px;
+  margin-left: 57px;
+  font-size: 10px;
+}
+.modal1 .fa-arrows-up-down-left-right {
+  background-color: black;
+  padding: 4px;
+  position: absolute;
+  z-index: 10;
+  color: white;
+  margin-top: 5px;
+  margin-left: 35px;
+  font-size: 10px;
+}
+.modal1 .img-editer {
+  position: absolute;
+  top: 120px;
+}
+
+/* Modal2*/
+
+.modal2 {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.arrow-back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.arrow-back .fa-arrow-left-long {
+  color: black;
+}
+
+.newPicture {
+  background: #e8f1f6;
+  padding: 20px 0 20px 0;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgPreview {
+  position: absolute;
+  visibility: hidden;
+  width: 200px;
+  height: 190px;
+  z-index: 50;
+  background: #ffffff;
+}
+
+.importImg {
+  width: 100%;
+  height: 100%;
+  z-index: 60;
+  background: #ffffff;
+}
+
+.newPicture .fa-regular {
+  color: #b9c5cc;
+  font-size: 100px;
+}
+
+.label-newPicture {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #cbd6dc;
+  color: #306685;
+  font-family: "Work Sans";
+  font-size: 14px;
+  border-radius: 33px;
+  width: 35%;
+  padding: 10px;
+}
+
+.input-newPicture {
+  visibility: hidden;
+}
+.format {
+  text-align: center;
+}
+
+/*Css du formulaire de la modale*/
+.formModal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formModal label {
+  display: flex;
+  font-family: "Work sans";
+  font-size: 14px;
+  color: black;
+  line-height: 16px;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.formModal input {
+  height: 41px;
+  width: 490px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none;
+}
+
+.formModal select {
+  height: 41px;
+  width: 490px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none;
+}
+
+.formModal .border {
+  margin-top: 40px;
+  width: 490px;
+}
+
+.validate {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  margin-top: 30px;
+  background: #a7a7a7;
+  color: white;
+  border-radius: 33px;
+  font-family: "Syne";
+  font-size: 17px;
+  border: none;
+  padding: 10px 90px 10px 90px;
+}
+.modalOpen2 {
+  display: block;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bar {
+  margin-top: 60px;
+  height: 1px;
+  width: 100%;
+  background-color: #aaa;
+}
+
+.modal-add {
+  color: white;
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 40px 100px;
+  border-radius: 60px;
+  background: #1d6154;
+  width: 240px;
+  height: 35px;
+}
+.modal-deleted {
+  border: none;
+  background: none;
+  text-align: center;
+  width: 100%;
+}
