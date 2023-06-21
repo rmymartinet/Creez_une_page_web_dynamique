@@ -19,14 +19,17 @@
     <link rel="stylesheet" href="../FrontEnd/index.css" />
   </head>
   <body>
-    <div class="banner-edition">
-      <i class="fa-regular fa-pen-to-square hidden" style="color: white"></i>
-      <button class="edit hidden">Mode édition</button>
-      <button class="btn2">publier les changements</button>
+    <div class="wrapper">
+      <div class="banner-edition" data-banner-edition>
+        <i class="fa-regular fa-pen-to-square" style="color: white"></i>
+        <button class="edit hidden" data-edit>Mode édition</button>
+        <button class="btn-publish" data-publish>
+          publier les changements
+        </button>
+      </div>
     </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-
       <nav>
         <ul>
           <li>projets</li>
@@ -34,6 +37,7 @@
           <li>
             <a
               class="log"
+              data-log
               href="/Portfolio-architecte-sophie-bluel/FrontEnd/login.html"
               >login</a
             >
@@ -46,8 +50,11 @@
       <section id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="" />
-          <i class="fa-regular fa-pen-to-square hidden"></i>
-          <button class="edit hidden">Modifier</button>
+          <i
+            class="fa-regular fa-pen-to-square hidden"
+            data-icon-modification
+          ></i>
+          <button class="edit hidden" data-edit>Modifier</button>
         </figure>
         <article>
           <h2>Designer d'espace</h2>
@@ -71,34 +78,46 @@
       <section id="portfolio">
         <div class="portfolio-header">
           <h2>Mes Projets</h2>
-          <i class="fa-regular fa-pen-to-square hidden"></i>
-          <button class="btn-modification edit hidden">Modifier</button>
+          <i
+            class="fa-regular fa-pen-to-square hidden"
+            data-icon-modification
+            data-icon-modification
+          ></i>
+          <button class="btn-modification edit hidden" data-edit>
+            Modifier
+          </button>
         </div>
-
-        <div class="modal1">
+        <div class="modal1" data-modal-1>
           <div class="modal-content">
             <h2>Galerie photo</h2>
-            <span class="close-button">&times;</span>
-            <div class="image-list">
-              <i class="fa-regular fa-trash-can hidden"></i>
-            </div>
+            <span class="close-button" data-close-button>&times;</span>
+            <div class="image-list" data-images-list></div>
             <div class="bar"></div>
-            <button class="modal-add">Ajoutez une photo</button>
-            <button class="modal-deleted">Supprimez la gallerie</button>
+            <button class="btn-add-images" data-btnAdd-images>
+              Ajoutez une photo
+            </button>
+            <button class="deleted-gallery" data-deleted-gallery>
+              Supprimez la gallerie
+            </button>
           </div>
         </div>
-        <div class="modal2">
+        <div class="modal2" data-modal-2>
           <div class="modal-content">
-            <div class="arrow-back">
-              <i class="fa-regular fa-arrow-left-long"></i>
+            <div class="arrow-back" data-arrow-back>
+              <i class="fa-solid fa-arrow-left"></i>
             </div>
-            <span class="close-button">&times;</span>
+            <span class="close-button" data-close-button>&times;</span>
             <div class="modalTitle">
               <h2 class="title">Ajout photo</h2>
             </div>
             <div class="newPicture">
               <div class="imgPreview">
-                <img alt="aperçu-image" src="" class="importImg" />
+                <img
+                  alt="aperçu-image"
+                  src=""
+                  class="importImg"
+                  data-import-images
+                />
               </div>
               <i class="fa-regular fa-image"></i>
               <label class="label-newPicture" for="addPic"
@@ -107,6 +126,7 @@
               <input
                 type="file"
                 class="input-newPicture"
+                data-input-newPicture
                 id="addPic"
                 name="addPic"
                 accept="jpg/png"
@@ -114,11 +134,21 @@
               <p class="format">jpg, png : 4mo max</p>
             </div>
             <div class="formModal-container">
-              <form class="formModal" method="post">
+              <form class="formModal" data-form-modal method="post">
                 <label for="input-title">Titre</label>
-                <input class="input-title" id="input-title" type="text" />
+                <input
+                  class="input-title"
+                  data-input-title
+                  id="input-title"
+                  type="text"
+                />
                 <label for="category">Catégorie</label>
-                <select class="category" id="category" name="category">
+                <select
+                  class="category"
+                  data-category
+                  id="category"
+                  name="category"
+                >
                   <option value=""></option>
                   <option id="1" class="categoryChoice">Objets</option>
                   <option id="2" class="categoryChoice">Appartements</option>
@@ -127,37 +157,38 @@
                   </option>
                 </select>
                 <div class="border"></div>
-                <button type="submit" class="validate">Valider</button>
+                <button type="submit" class="validate" data-validate>
+                  Valider
+                </button>
               </form>
             </div>
           </div>
         </div>
-        <div class="filters">
-          <button class="btn-0" data-btn-0>
+        <div class="filters" data-filters>
+          <button class="btn-tous" data-btn-0>
             <div class="filter-text">
               <p>Tous</p>
             </div>
           </button>
-          <button class="btn-1" data-btn-1>
+          <button class="btn-object" data-btn-1>
             <div class="filter-text">
               <p>Object</p>
             </div>
           </button>
-          <button class="btn-2" data-btn-2>
+          <button class="btn-appart" data-btn-2>
             <div class="filter-text">
               <p>Appartements</p>
             </div></button
-          ><button class="btn-3" data-btn-3>
+          ><button class="btn-hotel" data-btn-3>
             <div class="filter-text">
               <p>Hotel et restaurants</p>
             </div>
           </button>
         </div>
-        <div class="gallery"></div>
+        <div class="gallery" data-gallery></div>
       </section>
       <section id="contact">
         <h2>Contact</h2>
-        <p>Vous avez un projet ? Discutons-en !</p>
         <form action="#" method="post">
           <label for="name">Nom</label>
           <input type="text" name="name" id="name" />

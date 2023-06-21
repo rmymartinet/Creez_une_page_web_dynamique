@@ -1,4 +1,4 @@
-//Fonction récupère Image de l'API
+//Fonction récupération images de l'API
 function galleryWorksApi() {
   fetch("http://localhost:5678/api/works", {
     method: "get",
@@ -21,7 +21,7 @@ function galleryWorksApi() {
 }
 //Fonction qui ajoute les images à la gallerie
 function addWorkToGallery(works) {
-  const gallery = document.querySelector(".gallery");
+  const gallery = document.querySelector("[data-gallery]");
   gallery.innerHTML = "";
   works.forEach((work) => {
     const workElement = createWorkElement(work);
@@ -106,12 +106,11 @@ btnHotel.addEventListener("click", () => {
 });
 
 //Mode edition activé si l'utilisateur est connecté
-const log = document.querySelector(".log");
-const banner = document.querySelector(".banner-edition");
-const modifications = document.querySelector(".change");
-const filtres = document.querySelector(".filters");
-const editBtn = document.querySelectorAll(".edit");
-const editIcon = document.querySelectorAll(".fa-regular");
+const log = document.querySelector("[data-log]");
+const banner = document.querySelector("[data-banner-edition]");
+const filtres = document.querySelector("[data-filters]");
+const editActive = document.querySelectorAll("[data-edit]");
+const editIcon = document.querySelectorAll("[data-icon-modification]");
 
 //Mode édition
 function editionActive() {
@@ -119,7 +118,7 @@ function editionActive() {
     log.innerText = "logout";
     banner.style = "display:flex;";
     filtres.style = "display:none";
-    editBtn.forEach((button) => {
+    editActive.forEach((button) => {
       button.classList.remove("hidden");
     });
     editIcon.forEach((icon) => {
@@ -127,9 +126,7 @@ function editionActive() {
     });
   } else {
     banner.style = "display:none;";
-    modifications.style = "display:none;";
-    container.style = "display:none";
-    editBtn.forEach((button) => {
+    editActive.forEach((button) => {
       button.classList.add("hidden");
     });
     editIcon.forEach((icon) => {
@@ -144,17 +141,17 @@ log.addEventListener("click", () => {
   localStorage.removeItem("login");
   localStorage.removeItem("token");
   log.innerText = "login";
-  localStorage.clear;
+  localStorage.clear();
 });
 
 //Ouverture fenetre modal sur chaque clic de modifier
-const editionsActivate = document.querySelectorAll(".edit");
-const modal1 = document.querySelector(".modal1");
-const modal2 = document.querySelector(".modal2");
-const closeButton = document.querySelectorAll(".close-button");
-const modalDisplay = document.querySelector(".modal-add");
+// const editionsActivate = document.querySelectorAll("[data-edit]");
+const modal1 = document.querySelector("[data-modal-1]");
+const modal2 = document.querySelector("[data-modal-2]");
+const closeButton = document.querySelectorAll("[data-close-button]");
+const addImagesBtn = document.querySelector("[data-btnAdd-images]");
 
-editionsActivate.forEach((element) => {
+editActive.forEach((element) => {
   element.addEventListener("click", (e) => {
     e.preventDefault();
     modal1.style.display = "block";
@@ -167,21 +164,13 @@ closeButton.forEach((element) => {
   });
 });
 
-modalDisplay.addEventListener("click", (e) => {
+addImagesBtn.addEventListener("click", (e) => {
   e.preventDefault();
   modal2.style.display = "block";
   modal1.style.display = "none";
 });
 
-//Flèche de retour en arrière
-const arrowBack = document.querySelector(".arrow-back");
-arrowBack.addEventListener("click", (e) => {
-  e.preventDefault();
-  modal2.style.display = "none"; // Ferme modal2
-  modal1.style.display = "block";
-});
-
-const imageContainer = document.querySelector(".image-list");
+const imageContainer = document.querySelector("[data-images-list]");
 const token = localStorage.token;
 
 //Suppression images
@@ -193,26 +182,22 @@ fetch("http://localhost:5678/api/works")
     data.forEach((image) => {
       const imageContent = document.createElement("div");
       const imageElement = document.createElement("img");
-      const iconElement = document.createElement("div");
       const trashIcon = document.createElement("i");
       const moveIcon = document.createElement("i");
       const editerText = document.createElement("p");
 
-      //Editer la photo
-      editerText.innerText = "editer";
+      //Mettre les images en plcae dans la modal
+      imageContent.classList.add("image-content");
+      imageElement.classList.add("img-element");
+      imageElement.src = image.imageUrl;
+      imageContent.appendChild(imageElement);
+      // Mise en place du texte "editer"
       editerText.classList.add("img-editer");
       editerText.setAttribute("data-id", image.id);
+      editerText.innerText = "editer";
       imageContent.appendChild(editerText);
 
-      //Mettre les images en plcae dans la modal
-      imageElement.src = image.imageUrl;
-      imageElement.draggable = true;
-      imageContent.appendChild(imageElement);
-      imageElement.classList.add("img-element");
-
       //Mise en place du logo Trash
-      iconElement.classList.add("icon-modal1");
-      iconElement.appendChild(imageContent);
       trashIcon.classList.add("fa-regular", "fa-trash-can");
       trashIcon.setAttribute("data-id", image.id);
       imageContent.appendChild(trashIcon);
@@ -224,7 +209,7 @@ fetch("http://localhost:5678/api/works")
 
       imageContainer.classList.add("image-container");
       imageContainer.appendChild(imageContent);
-      imageContent.appendChild(imageElement);
+      // imageContent.appendChild(imageElement);
     });
 
     //Suppresion image
@@ -290,98 +275,73 @@ async function deleteWorks(workId) {
     console.error("Erreur lors de la requête de suppression", error);
   }
 }
-// Déplacement des images
-const draggable = document.querySelectorAll(".img-element");
-const containers = document.querySelectorAll(".image-container");
-
-draggable.forEach((draggable) => {
-  draggable.addEventListener("dragstart", () => {
-    draggable.classList.add("dragging");
-  });
-  draggable.addEventListener("dragend", () => {
-    draggable.classList.remove("dragging");
-  });
-});
-
-containers.forEach((container) => {
-  container.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    const afterElement = getDragAfterElement(container, e.clientY);
-    const draggable = document.querySelector(".dragging");
-    if (afterElement == null) {
-      container.appendChild(draggable);
-    } else {
-      container.insertBefore(draggable, afterElement);
+const deletedGallery = document.querySelector("[data-deleted-gallery]");
+deletedGallery.addEventListener("click", async () => {
+  try {
+    const response = await fetch("http://localhost:5678/api/works");
+    const data = await response.json();
+    for (const image of data) {
+      await deleteWorks(image.id);
     }
-  });
+
+    imageContainer.innerHTML = "";
+  } catch (error) {
+    console.error("Erreur lors de la suppression des images", error);
+  }
 });
 
-function getDragAfterElement(container, y) {
-  const draggableElements = [
-    ...container.querySelectorAll(".img-element:not(.dragging)"),
-  ];
-
-  return draggableElements.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child };
-      } else {
-        return closest;
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element;
-}
-
-const newPicmodale = document.querySelector(".input-newPicture"); // Sélectionne l'élément d'entrée pour la nouvelle image
-const preview = document.querySelector(".importImg"); // Sélectionne l'élément d'aperçu de l'image
-const addTitle = document.querySelector(".input-title"); // Sélectionne l'élément d'entrée pour le titre
-const newCategorie = document.querySelector(".category"); // Sélectionne l'élément de la nouvelle catégorie
-const submitProject = document.querySelector(".validate"); // Sélectionne le bouton de soumission du projet
-const form2 = document.querySelector(".formModal"); // Sélectionne le formulaire 2
-const editionSubmitBtn = document.querySelector(".btn2"); // Sélectionne le bouton de soumission pour l'édition
-
+const newPicmodale = document.querySelector("[data-input-newPicture]");
+const preview = document.querySelector("[data-import-images]");
+const addTitle = document.querySelector("[data-input-title]");
+const newCategorie = document.querySelector("[data-category]");
+const submitProject = document.querySelector("[data-validate]");
+const form2 = document.querySelector("[data-form-modal]");
 let imgPreview;
 let inputTitle;
 let inputCategory;
-
 function addPicture() {
-  newPicmodale.addEventListener("change", (e) => {
-    // Événement déclenché lorsque la valeur de l'élément d'entrée pour la nouvelle image change
-    imgPreview = e.target.files[0]; // Récupère le fichier de l'élément d'entrée
-    preview.src = URL.createObjectURL(newPicmodale.files[0]); // Définit l'URL de prévisualisation de l'image
-    preview.style.visibility = "visible"; // Rend l'élément d'aperçu de l'image visible
+  //Ajout des images//
+  newPicmodale.addEventListener("input", (e) => {
+    console.log(newPicmodale.files[0]);
+    imgPreview = e.target.files[0];
+    const imgModale2 = URL.createObjectURL(newPicmodale.files[0]);
+    preview.src = imgModale2;
+    preview.style = "visibility:visible";
+  });
+  //Ajout des titres//
+  addTitle.addEventListener("input", (e) => {
+    inputTitle = e.target.value;
+    console.log(inputTitle);
+  });
+  //ajout des categories//
+  newCategorie.addEventListener("input", (e) => {
+    inputCategory = e.target.selectedIndex;
+    console.log(inputCategory);
+    console.log(token);
+  });
+  //changement de la couleur du bouton si tout les élèments sont remplis pour la validation du projet//
+  form2.addEventListener("change", () => {
+    if (imgPreview && inputTitle && inputCategory) {
+      submitProject.style.background = "#1d6154";
+    } else {
+      submitProject.style.background = "";
+    }
+  });
+  //soumettre le projet//
+  submitProject.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (imgPreview && inputTitle && inputCategory) {
+      //creer un fromData pour envoyer les données//
+      const formData = new FormData();
+      formData.append("image", imgPreview); //ajout de l'image//
+      formData.append("title", inputTitle); //AJOUT DU TITRE//
+      formData.append("category", inputCategory);
+      console.log(formData);
+      newDataSubmit(formData);
+      modalOpen = true;
 
-    addTitle.addEventListener("input", (e) => {
-      // Événement déclenché lorsque la valeur de l'élément d'entrée pour le titre change
-      inputTitle = e.target.value; // Récupère la valeur du titre
-    });
-
-    newCategorie.addEventListener("change", (e) => {
-      // Événement déclenché lorsque la valeur de l'élément de la nouvelle catégorie change
-      inputCategory = e.target.selectedIndex; // Récupère l'index de la catégorie sélectionnée
-    });
-
-    form2.addEventListener("change", () => {
-      // Événement déclenché lorsque la valeur du formulaire 2 change
-      submitProject.style.background =
-        imgPreview && inputTitle && inputCategory ? "#1d6154" : ""; // Définit la couleur de fond du bouton de soumission en fonction de la présence de l'image, du titre et de la catégorie
-    });
-
-    submitProject.addEventListener("click", async (e) => {
-      // Événement déclenché lors du clic sur le bouton de soumission du projet
-      e.preventDefault();
-
-      if (imgPreview && inputTitle && inputCategory) {
-        // Vérifie si l'image, le titre et la catégorie sont présents
-        const formData = new FormData(); // Crée un objet FormData pour envoyer les données du formulaire
-        formData.append("image", imgPreview); // Ajoute l'image au formulaire
-        formData.append("title", inputTitle); // Ajoute le titre au formulaire
-        formData.append("category", inputCategory); // Ajoute la catégorie au formulaire
-        newDataSubmit(formData);
-        async function newDataSubmit(formData) {
+      async function newDataSubmit(formData) {
+        try {
           const response = await fetch("http://localhost:5678/api/works", {
             method: "post",
             headers: {
@@ -392,12 +352,52 @@ function addPicture() {
           });
           const dataResponse = await response.json();
           console.log(dataResponse);
+          // Ajouter l'image à la galerie sans rechargement de la page
+          const figure = document.createElement("figure");
+          const image = document.createElement("img");
+          image.classList.add("image-modale");
+          image.src = dataResponse.imageUrl;
+          const caption = document.createElement("figcaption");
+          caption.innerText = "éditer";
+          const icon = document.createElement("img");
+          icon.src = "./assets/icons/trash.png";
+          icon.classList.add("icon");
+          figure.appendChild(icon);
+          figure.appendChild(image);
+          figure.appendChild(caption);
+          imageContainer.appendChild(figure);
+          afficherToutesLesImages();
+          // Ajouter l'image à la galerie sans rechargement de la page
+        } catch (error) {
+          console.log("il y a eu une erreur sur le fetch");
         }
       }
-    });
+    }
   });
 }
 addPicture();
-editionSubmitBtn.addEventListener("click", () => {
-  location.reload(); // Recharge la page lors du clic sur le bouton de soumission pour l'édition
+
+const arrowBack = document.querySelector("[data-arrow-back]");
+arrowBack.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal2.style.display = "none";
+  modal1.style.display = "block";
 });
+
+const editionSubmitBtn = document.querySelector("[data-publish]");
+editionSubmitBtn.addEventListener("click", function () {
+  quitterModeEdition();
+});
+
+function quitterModeEdition() {
+  log.innerText = "logout";
+  banner.style = "display:none;";
+  filtres.style = "display:flex";
+
+  editActive.forEach((button) => {
+    button.classList.add("hidden");
+  });
+  editIcon.forEach((icon) => {
+    icon.classList.add("hidden");
+  });
+}

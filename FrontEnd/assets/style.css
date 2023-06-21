@@ -108,6 +108,15 @@ section {
 body {
   line-height: 1;
 }
+
+button {
+  background: none;
+  border: none;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
 ol,
 ul {
   list-style: none;
@@ -129,490 +138,24 @@ table {
 }
 /** end reset css**/
 body {
+  font-family: "Work Sans";
+  font-size: 14px;
+}
+main {
   max-width: 1140px;
   margin: auto;
-  font-family: "Work Sans";
-  font-size: 14px;
+  padding: 0 50px;
 }
 header {
+  max-width: 1140px;
+  margin: auto;
+  padding: 0 50px;
+  padding-bottom: 100px;
   display: flex;
   justify-content: space-between;
-  margin: 50px 0;
-}
-s/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-  background: #fefef6;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-/*Modification css pour la première fenetre modale*/
-.modalContainer {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  background-color: #ffffff;
-  padding: 80px;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: black;
-  cursor: pointer;
-}
-
-.close .material-symbols-outlined {
-  color: black;
-}
-.modalTitle {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-size: 26px;
-  font-weight: bold;
-  font-family: "Work Sans";
-}
-
-.modalOpen {
-  display: block;
-}
-/*Affichage des images dans la modale*/
-
-.imageContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  flex-wrap: wrap;
-  height: 60%;
-  justify-content: flex-start;
-  margin-bottom: 30px;
-  overflow: hidden;
-}
-
-.border {
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid #b3b3b3;
-  height: 0.3px;
-  width: 80%;
-  align-self: center;
-}
-
-.addPicture {
-  position: relative;
-  text-align: center;
-}
-
-.deleteGallery {
-  color: red;
-  text-align: center;
-  font-family: "Syne";
-}
-
-.modal input {
-  align-self: center;
-  padding: 5px 20px 5px 20px;
-}
-
-.imageContainer figure {
-  position: relative;
-  padding: 5px;
-}
-.image-modale {
-  height: 105px;
-  width: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.image-modale figcaption {
-  font-family: "Work Sans";
-  font-size: 12px;
-  text-align: center;
-}
-
-.icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 12px;
-  height: 12px;
-  background: black;
-  padding: 4px;
-}
-
-.crossarrow {
-  position: absolute;
-  top: 10px;
-  right: 35px;
-  width: 12px;
-  height: 12px;
-  background: black;
-  padding: 4px;
-}
-
-/*Modification de la deuxième fenetre modale*/
-
-.modalContainer_2 {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
-}
-
-.modal_2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  background-color: #ffffff;
-  padding: 80px;
-}
-
-.arrow-back {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  cursor: pointer;
-}
-
-.arrow-back .material-symbols-outlined {
-  color: black;
-}
-
-.newPicture {
-  background: #e8f1f6;
-  padding: 20px 0 20px 0;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.imgPreview {
-  visibility: hidden;
-  position: absolute;
-  width: 200px;
-  height: 190px;
-  z-index: 50;
-  background: #ffffff;
-}
-
-.importImg {
-  width: 100%;
-  height: 100%;
-  z-index: 60;
-  background: #ffffff;
-}
-
-.newPicture .material-symbols-outlined {
-  color: #b9c5cc;
-  margin-bottom: 15px;
-  font-size: 150px;
-}
-
-.label-newPicture {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #cbd6dc;
-  color: #306685;
-  font-family: "Work Sans";
-  font-size: 14px;
-  border-radius: 33px;
-  width: 35%;
-  padding: 10px;
-}
-
-.input-newPicture {
-  visibility: hidden;
-}
-.format {
-  text-align: center;
-}
-
-/*Css du formulaire de la modale*/
-.formModal-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.formModal label {
-  display: flex;
-  font-family: "Work sans";
-  font-size: 14px;
-  color: black;
-  line-height: 16px;
-  text-align: left;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.formModal input {
-  height: 41px;
-  width: 490px;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-  border: none;
-}
-
-.formModal select {
-  height: 41px;
-  width: 490px;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-  border: none;
-}
-
-.formModal .border {
-  margin-top: 40px;
-  width: 490px;
-}
-
-.validate {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  margin-top: 30px;
-  background: #a7a7a7;
-  color: white;
-  border-radius: 33px;
-  font-family: "Syne";
-  font-size: 17px;
-  border: none;
-  padding: 10px 90px 10px 90px;
-}
-.modalOpen2 {
-  display: block;
-}
-/*Modification du css pour la banniere de la modale*/
-
-.editionBanner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  background: black;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.edition button {
-  background: #ffffff;
-  color: black;
-  padding: 10px;
-  font-family: "Syne";
-  font-size: 10px;
-  border-radius: 33px;
-}
-
-.edition {
-  align-self: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 25%;
-}
-
-.editionText {
-  color: white;
-  text-align: center;
-}
-
-.material-symbols-outlined {
-  color: white;
-}
-/*Fin de la banniere de la modale*/
-
-header {
-  display: flex;
-  justify-content: space-between;
-  margin: 80px 0;
-}
-.log {
-  text-decoration: none;
-  color: black;
-}
-
-.log:hover {
-  color: #b1663c;
 }
 section {
   margin: 50px 0;
-}
-
-.change {
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 55px;
-}
-figure .change p {
-  font-family: "Work Sans";
-  margin-top: 10px;
-}
-
-.changingContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.changingContainer .change {
-  margin-bottom: 30px;
-}
-
-.changeText:hover {
-  cursor: pointer;
 }
 
 h1 {
@@ -636,31 +179,6 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
-
-.filters {
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 30px;
-}
-
-.filters button {
-  border: 1px solid #1d6154;
-  border-radius: 60px;
-  background: #ffffff;
-  color: #1d6154;
-  font-size: 20px;
-  font-family: "Syne";
-  padding: 10px;
-}
-
-.filters button:hover {
-  background: #1d6154;
-  color: #ffffff;
-}
-
 nav ul {
   display: flex;
   align-items: center;
@@ -669,7 +187,6 @@ nav ul {
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
-  cursor: pointer;
 }
 
 li:hover {
@@ -678,6 +195,7 @@ li:hover {
 #introduction {
   display: flex;
   align-items: center;
+  margin-bottom: 160px;
 }
 #introduction figure {
   flex: 1;
@@ -691,6 +209,9 @@ li:hover {
 #introduction article {
   flex: 1;
 }
+article p {
+  margin-right: 100px;
+}
 #introduction h2 {
   margin-bottom: 1em;
 }
@@ -698,10 +219,7 @@ li:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
-#portfolio h2 {
-  text-align: center;
-  margin-bottom: 1em;
-}
+
 .gallery {
   width: 100%;
   display: grid;
@@ -744,7 +262,7 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.valider {
+input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -755,24 +273,8 @@ li:hover {
   border-radius: 60px;
 }
 
-footer {
-  background: #ffffff;
-  height: 2em;
-  width: 100%;
-}
-
 footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
-}
-
-.forgot {
-  text-align: center;
-  color: black;
-  font-family: "Work Sans";
-}
-
-.menu:hover {
-  font-weight: bold;
 }

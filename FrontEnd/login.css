@@ -1,0 +1,13 @@
+.header-content {
+  margin: 50px 0;
+}
+
+.forgot {
+  text-align: center;
+}
+
+#footer-login {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

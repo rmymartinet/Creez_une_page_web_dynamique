@@ -6,18 +6,18 @@
   gap: 10px;
   margin: 50px;
 }
-.btn-0,
-.btn-1,
-.btn-2,
-.btn-3 {
+.filters .btn-tous,
+.filters .btn-object,
+.filters .btn-appart,
+.filters .btn-hotel {
   border-radius: 60px;
   border: solid 1px #1d6154;
   color: #1d6154;
 }
-.btn-0:hover,
-.btn-1:hover,
-.btn-2:hover,
-.btn-3:hover {
+.filters .btn-tous:hover,
+.filters .btn-object:hover,
+.filters .btn-appart:hover,
+.filters .btn-hotel:hover {
   background-color: #1d6154;
   color: white;
 }
@@ -32,64 +32,14 @@
   text-align: center;
 }
 
-#contact {
-  width: 50%;
-  margin: auto;
-}
-#contact > * {
-  text-align: center;
-}
-#contact h2 {
-  margin-bottom: 20px;
-}
-#contact form {
-  text-align: left;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-#contact input {
-  height: 50px;
-  font-size: 1.2em;
-  border: none;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label {
-  margin: 2em 0 1em 0;
-}
-#contact textarea {
-  border: none;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-input[type="submit"] {
-  font-family: "Syne";
-  font-weight: 700;
-  color: white;
-  background-color: #1d6154;
-  margin: 2em auto;
-  width: 180px;
-  text-align: center;
-  border-radius: 60px;
-}
-
-footer nav ul {
-  display: flex;
-  justify-content: flex-end;
-  margin: 2em;
-}
-
 .wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .edit,
 i {
-  /* display: none; */
   font-size: 15px;
+  cursor: pointer;
 }
 .hidden {
   display: none;
@@ -102,6 +52,16 @@ i {
   background: none;
   font-family: "Work Sans", sans-serif;
 }
+.portfolio-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7rem;
+}
+.portfolio-header i {
+  margin-left: 20px;
+  font-size: 15px;
+}
 .banner-edition {
   margin: 0;
   display: flex;
@@ -111,13 +71,8 @@ i {
   height: 50px;
 }
 
-.banner-edition .btn-1 button {
-  background: none;
-  border: none;
-  color: white;
-}
-
-.banner-edition .btn2 {
+.banner-edition .btn-publish {
+  cursor: pointer;
   margin-left: 15px;
   background-color: white;
   padding: 10px 15px;
@@ -133,15 +88,15 @@ i {
   margin-left: 55px;
 }
 
-.portfolio-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6rem;
-}
-.portfolio-header i {
-  margin-left: 20px;
-  font-size: 15px;
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 25px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .modal1 {
@@ -162,10 +117,11 @@ i {
   padding: 0 100px;
   border: 1px solid #888;
   width: 630px;
-  height: 730px;
+  height: 950px;
 }
 
 .modal-content h2 {
+  text-align: center;
   padding-top: 50px;
   padding-bottom: 40px;
   color: #000;
@@ -176,7 +132,7 @@ i {
 .image-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   flex-wrap: wrap;
@@ -189,46 +145,29 @@ i {
   margin-bottom: 10px;
 }
 
-.image-container {
-  position: relative;
-}
-.img-element {
+.image-content {
   position: relative;
 }
 
-.close-button {
-  position: absolute;
-  right: 35px;
-  top: 25px;
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
 .modal1 .fa-trash-can {
   background-color: black;
   padding: 4px;
   position: absolute;
+  top: 5px;
+  right: 5px;
   z-index: 10;
   color: white;
-  margin-top: 5px;
-  margin-left: 57px;
   font-size: 10px;
 }
 .modal1 .fa-arrows-up-down-left-right {
   background-color: black;
   padding: 4px;
   position: absolute;
+  top: 5px;
+  right: 25px;
   z-index: 10;
   color: white;
-  margin-top: 5px;
-  margin-left: 35px;
   font-size: 10px;
-}
-.modal1 .img-editer {
-  position: absolute;
-  top: 120px;
 }
 
 /* Modal2*/
@@ -247,13 +186,14 @@ i {
 
 .arrow-back {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   cursor: pointer;
 }
 
-.arrow-back .fa-arrow-left-long {
+.arrow-back .fa-arrow-left {
   color: black;
+  font-size: 20px;
 }
 
 .newPicture {
@@ -267,8 +207,8 @@ i {
 }
 
 .imgPreview {
-  position: absolute;
   visibility: hidden;
+  position: absolute;
   width: 200px;
   height: 190px;
   z-index: 50;
@@ -378,22 +318,37 @@ i {
   background-color: #aaa;
 }
 
-.modal-add {
+.modal-content .modal-add {
+  margin-left: 190px;
+}
+
+.btn-add-images {
   color: white;
   font-family: "Syne";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
-  margin: 40px 100px;
+  margin-left: 190px;
+  margin-right: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   border-radius: 60px;
   background: #1d6154;
   width: 240px;
   height: 35px;
 }
-.modal-deleted {
+.deleted-gallery {
   border: none;
   background: none;
   text-align: center;
   width: 100%;
+}
+
+.gallery {
+  margin-bottom: 90px;
+}
+
+.work p {
+  margin-top: 10px;
 }
