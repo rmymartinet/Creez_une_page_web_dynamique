@@ -28,6 +28,30 @@ function addWorkToGallery(works) {
     gallery.appendChild(workElement);
   });
 }
+
+async function afficherToutesLesImages() {
+  // Effacer les éléments actuels dans le conteneur
+  itemsContainer.innerHTML = "";
+
+  // Effectuer une requête Fetch pour obtenir toutes les données de l'API
+  const response = await fetch("http://localhost:5678/api/works/")
+    .then((response) => response.json())
+    .then((data) => {
+      // Parcourir tous les éléments et les ajouter au conteneur
+      data.forEach((element) => {
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        image.src = element.imageUrl;
+        const caption = document.createElement("figcaption");
+        caption.textContent = element.title;
+
+        figure.appendChild(image);
+        figure.appendChild(caption);
+        itemsContainer.appendChild(figure);
+      });
+    });
+}
+
 //Création work qui regoupe les images
 function createWorkElement(work) {
   const workElement = document.createElement("div");
@@ -335,6 +359,9 @@ function addPicture() {
       //vérification taille de l'image
       if (imgPreview.size > 4 * 1024 * 1024) {
         alert("Erreur : la taille de l'image ne doit pas dépasser 4 Mo.");
+        form2.reset(); // Réinitialiser le formulaire
+        preview.src = ""; // Supprimer l'image de l'élément <img>
+        preview.style.visibility = "hidden"; // Masquer l'élément <img>
         return;
       }
 
@@ -342,6 +369,9 @@ function addPicture() {
       const fileExtension = imgPreview.name.split(".").pop().toLowerCase();
       if (!["jpg", "jpeg", "png"].includes(fileExtension)) {
         alert("Erreur : le format de l'image doit être JPEG ou PNG.");
+        form2.reset(); // Réinitialiser le formulaire
+        preview.src = ""; // Supprimer l'image de l'élément <img>
+        preview.style.visibility = "hidden"; // Masquer l'élément <img>
         return;
       }
 
@@ -365,22 +395,10 @@ function addPicture() {
           });
           const dataResponse = await response.json();
           console.log(dataResponse);
-          // Ajouter l'image à la galerie sans rechargement de la page
-          const figure = document.createElement("figure");
-          const image = document.createElement("img");
-          image.classList.add("image-modale");
-          image.src = dataResponse.imageUrl;
-          const caption = document.createElement("figcaption");
-          caption.innerText = "éditer";
-          const icon = document.createElement("img");
-          icon.src = "./assets/icons/trash.png";
-          icon.classList.add("icon");
-          figure.appendChild(icon);
-          figure.appendChild(image);
-          figure.appendChild(caption);
-          imageContainer.appendChild(figure);
-          afficherToutesLesImages();
-          // Ajouter l'image à la galerie sans rechargement de la page
+          // Ajouter la nouvelle image à la galerie sans recharger la page
+          const workElement = createWorkElement(dataResponse);
+          const gallery = document.querySelector("[data-gallery]");
+          gallery.appendChild(workElement);
         } catch (error) {
           console.log("il y a eu une erreur sur le fetch");
         }
