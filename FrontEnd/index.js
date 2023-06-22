@@ -306,7 +306,7 @@ function addPicture() {
     imgPreview = e.target.files[0];
     const imgModale2 = URL.createObjectURL(newPicmodale.files[0]);
     preview.src = imgModale2;
-    preview.style = "visibility:visible";
+    preview.style.visibility = "visible";
   });
   //Ajout des titres//
   addTitle.addEventListener("input", (e) => {
@@ -323,6 +323,7 @@ function addPicture() {
   form2.addEventListener("change", () => {
     if (imgPreview && inputTitle && inputCategory) {
       submitProject.style.background = "#1d6154";
+      submitProject.style.cursor = "pointer";
     } else {
       submitProject.style.background = "";
     }
@@ -331,6 +332,19 @@ function addPicture() {
   submitProject.addEventListener("click", (e) => {
     e.preventDefault();
     if (imgPreview && inputTitle && inputCategory) {
+      //vérification taille de l'image
+      if (imgPreview.size > 4 * 1024 * 1024) {
+        alert("Erreur : la taille de l'image ne doit pas dépasser 4 Mo.");
+        return;
+      }
+
+      // Vérifier le format de l'image
+      const fileExtension = imgPreview.name.split(".").pop().toLowerCase();
+      if (!["jpg", "jpeg", "png"].includes(fileExtension)) {
+        alert("Erreur : le format de l'image doit être JPEG ou PNG.");
+        return;
+      }
+
       //creer un fromData pour envoyer les données//
       const formData = new FormData();
       formData.append("image", imgPreview); //ajout de l'image//
@@ -338,7 +352,6 @@ function addPicture() {
       formData.append("category", inputCategory);
       console.log(formData);
       newDataSubmit(formData);
-      modalOpen = true;
 
       async function newDataSubmit(formData) {
         try {

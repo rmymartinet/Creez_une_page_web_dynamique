@@ -71,6 +71,9 @@ i {
   height: 50px;
 }
 
+.banner-edition .fa-pen-to-square {
+  color: white;
+}
 .banner-edition .btn-publish {
   cursor: pointer;
   margin-left: 15px;
@@ -132,7 +135,6 @@ i {
 .image-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* grid-template-rows: repeat(3, 1fr); */
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   flex-wrap: wrap;
@@ -240,11 +242,13 @@ i {
   border-radius: 33px;
   width: 35%;
   padding: 10px;
+  cursor: pointer;
 }
 
 .input-newPicture {
   visibility: hidden;
 }
+
 .format {
   text-align: center;
 }
@@ -337,12 +341,13 @@ i {
   background: #1d6154;
   width: 240px;
   height: 35px;
+  cursor: pointer;
 }
 .deleted-gallery {
   border: none;
   background: none;
-  text-align: center;
-  width: 100%;
+  margin-left: 245px;
+  cursor: pointer;
 }
 
 .gallery {
