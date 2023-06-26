@@ -1,24 +1,26 @@
 //Fonction récupération images de l'API
 function galleryWorksApi() {
-  fetch("http://localhost:5678/api/works", {
-    method: "get",
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des œuvres.");
-      }
-      return response.json();
+  try {
+    fetch("http://localhost:5678/api/works", {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
     })
-    .then((data) => {
-      addWorkToGallery(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des œuvres.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        addWorkToGallery(data);
+      });
+  } catch (error) {
+    console.error(error);
+  }
 }
+
 //Fonction qui ajoute les images à la gallerie
 function addWorkToGallery(works) {
   const gallery = document.querySelector("[data-gallery]");
@@ -28,30 +30,6 @@ function addWorkToGallery(works) {
     gallery.appendChild(workElement);
   });
 }
-
-async function afficherToutesLesImages() {
-  // Effacer les éléments actuels dans le conteneur
-  itemsContainer.innerHTML = "";
-
-  // Effectuer une requête Fetch pour obtenir toutes les données de l'API
-  const response = await fetch("http://localhost:5678/api/works/")
-    .then((response) => response.json())
-    .then((data) => {
-      // Parcourir tous les éléments et les ajouter au conteneur
-      data.forEach((element) => {
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        image.src = element.imageUrl;
-        const caption = document.createElement("figcaption");
-        caption.textContent = element.title;
-
-        figure.appendChild(image);
-        figure.appendChild(caption);
-        itemsContainer.appendChild(figure);
-      });
-    });
-}
-
 //Création work qui regoupe les images
 function createWorkElement(work) {
   const workElement = document.createElement("div");
@@ -197,7 +175,6 @@ addImagesBtn.addEventListener("click", (e) => {
 const imageContainer = document.querySelector("[data-images-list]");
 const token = localStorage.token;
 
-//Suppression images
 fetch("http://localhost:5678/api/works")
   .then((response) => response.json())
   .then((data) => {
@@ -239,8 +216,8 @@ fetch("http://localhost:5678/api/works")
     //Suppresion image
     const deleteIcons = document.querySelectorAll(".fa-trash-can");
     deleteIcons.forEach((icon) => {
-      icon.addEventListener("click", (event) => {
-        const imageIndex = event.target.getAttribute("data-id");
+      icon.addEventListener("click", (e) => {
+        const imageIndex = e.target.getAttribute("data-id");
         deleteWorks(imageIndex);
         icon.parentElement.remove();
       });
@@ -253,6 +230,7 @@ async function updateGallery() {
     const data = await response.json();
 
     // Effacer les éléments actuels dans la galerie
+    const gallery = document.querySelector("[data-gallery]");
     gallery.innerHTML = "";
 
     // Parcourir les données et ajouter les images à la galerie

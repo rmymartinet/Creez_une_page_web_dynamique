@@ -1,7 +1,7 @@
 const submit = document.querySelector("input[type=submit]");
 const log = document.querySelector(".login");
 //création d'un ecouteur d'evenement sur le bouton Submit
-submit.addEventListener("click", function (e) {
+submit.addEventListener("click", (e) => {
   e.preventDefault();
   identification();
 });
