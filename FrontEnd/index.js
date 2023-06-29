@@ -20,7 +20,6 @@ function galleryWorksApi() {
     console.error(error);
   }
 }
-
 //Fonction qui ajoute les images à la gallerie
 function addWorkToGallery(works) {
   const gallery = document.querySelector("[data-gallery]");
@@ -68,6 +67,7 @@ btnTous.addEventListener("click", () => {
     } else {
       work.style.display = "none";
     }
+    resetButtonStyle(btnAppart, btnHotel, btnObject);
   }
 });
 btnObject.addEventListener("click", () => {
@@ -76,9 +76,12 @@ btnObject.addEventListener("click", () => {
     const work = works[i];
     const categoryName = work.getAttribute("data-category-name");
     if (categoryName === "Objets") {
+      btnObject.style.background = "#1d6154";
+      btnObject.style.color = "white";
       work.style.display = "block";
     } else {
       work.style.display = "none";
+      resetButtonStyle(btnAppart, btnHotel, btnTous);
     }
   }
 });
@@ -91,6 +94,7 @@ btnAppart.addEventListener("click", () => {
       work.style.display = "block";
     } else {
       work.style.display = "none";
+      resetButtonStyle(btnObject, btnHotel, btnTous);
     }
   }
 });
@@ -103,9 +107,29 @@ btnHotel.addEventListener("click", () => {
       work.style.display = "block";
     } else {
       work.style.display = "none";
+      resetButtonStyle(btnAppart, btnObject, btnTous);
     }
   }
 });
+
+function resetButtonStyle(...buttons) {
+  const resetColorBtns = document.querySelectorAll("[data-color]");
+  resetColorBtns.forEach((button) => {
+    if (!buttons.includes(button)) {
+      button.style.background = "#1d6154";
+      button.style.color = "white";
+    }
+  });
+  buttons.forEach((button) => {
+    button.style.background = "white";
+    button.style.color = "#1d6154";
+  });
+}
+window.onload = () => {
+  const btnTous = document.querySelector("[data-btn-0]");
+  btnTous.style.background = "#1d6154";
+  btnTous.style.color = "white";
+};
 
 //Mode edition activé si l'utilisateur est connecté
 const log = document.querySelector("[data-log]");
@@ -140,10 +164,15 @@ editionActive();
 
 //Désactivation du mode logout au click
 log.addEventListener("click", () => {
-  localStorage.removeItem("login");
-  localStorage.removeItem("token");
-  log.innerText = "login";
-  localStorage.clear();
+  if (localStorage.login === undefined) {
+    window.location.href = "./login.html";
+  } else if (localStorage.login === "true") {
+    localStorage.removeItem("login");
+    localStorage.removeItem("token");
+    log.innerText = "login";
+    localStorage.clear();
+    window.location.href = "./index.html";
+  }
 });
 
 //Ouverture fenetre modal sur chaque clic de modifier
@@ -385,6 +414,15 @@ function addPicture() {
   });
 }
 addPicture();
+
+// Fermer la modal lorsque vous cliquez en dehors
+window.addEventListener("click", (e) => {
+  if (e.target === modal1) {
+    modal1.style.display = "none";
+  } else if (e.target === modal2) {
+    modal2.style.display = "none";
+  }
+});
 
 const arrowBack = document.querySelector("[data-arrow-back]");
 arrowBack.addEventListener("click", (e) => {
